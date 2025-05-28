@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Collier Tutoring</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #f0f8f4;
+      color: #2f3e2e;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      text-align: center;
+      padding: 2rem 1rem;
+      background-color: #d1e7dd;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+      color: #1b4332;
+    }
+
+    header p {
+      margin-top: 0.5rem;
+      color: #2d6a4f;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      background-color: #95d5b2;
+      padding: 1rem;
+    }
+
+    nav button {
+      background: #52b788;
+      border: none;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      color: white;
+      transition: background 0.3s;
+    }
+
+    nav button:hover {
+      background: #40916c;
+    }
+
+    .tab-content {
+      display: none;
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      animation: fadeIn 0.4s ease-in-out;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    form label {
+      display: block;
+      margin-top: 1rem;
+    }
+
+    form input, form select, form textarea {
+      width: 100%;
+      padding: 0.5rem;
+      margin-top: 0.25rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    form input[type="checkbox"] {
+      width: auto;
+      margin-right: 0.5rem;
+    }
+
+    form button {
+      margin-top: 1.5rem;
+      padding: 0.5rem 1rem;
+      background-color: #52b788;
+      border: none;
+      color: white;
+      font-size: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    form button:hover {
+      background-color: #40916c;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div style="display: flex; align-items: center; justify-content: center; gap: 1rem;">
+      <img src="logo.png" alt="Collier Tutoring Logo" style="max-width: 100px;">
+      <div>
+    <h1>Collier Tutoring</h1>
+        <p>Expert tutoring in Math, SAT, CS, and more</p>
+      </div>
+    </div>
+  </header>
+
+  <nav>
+    <button onclick="showTab('about')" title="Learn more about Collier Tutoring and our mission">About</button>
+    <button onclick="showTab('subjects')" title="See the subjects we tutor across high school and college">Subjects</button>
+    <button onclick="showTab('tutors')" title="Meet our experienced educators">Tutors</button>
+    <button onclick="showTab('faq')" title="Frequently asked questions about our services">FAQ</button>
+    <button onclick="showTab('contact')" title="Find out how to get in touch with us">Contact</button>
+    <button onclick="showTab('virtual')" title="Instructions for joining sessions online">Virtual Session How-To</button>
+  </nav>
+
+  <div id="about" class="tab-content active">
+    <h2>About Collier Tutoring</h2>
+    <p>
+      Collier Tutoring is a family-run service based in Georgia, led by an experienced educator 
+      specializing in SAT prep, mathematics, statistics, AP subjects, and Chinese language.
+      We provide customized one-on-one tutoring both online and in person.
+    </p>
+  </div>
+
+  <div id="subjects" class="tab-content">
+    <h2>Subjects We Offer</h2>
+    <ul>
+      <li>SAT Preparation</li>
+      <li>Algebra, Geometry, Trigonometry, Pre-Calc, Calculus</li>
+      <li>Statistics (AP and College)</li>
+      <li>AP Chinese Language and Culture</li>
+      <li>Computer Science (Java, Python, AP CS A)</li>
+      <li>Physics (Conceptual, Honors, AP Physics 1 & C)</li>
+    </ul>
+  </div>
+
+  <div id="tutors" class="tab-content">
+    <h2>Meet Our Tutors</h2>
+    <p>
+      <strong>Lead Tutor:</strong> Over 10 years of experience in SAT, math, statistics, and Chinese, 
+      providing patient and tailored instruction.
+    </p>
+    <p>
+      <strong>Co-Tutor:</strong> Focuses on computer science and physics, supporting students with 
+      deep conceptual learning and problem-solving.
+    </p>
+  </div>
+
+  <div id="faq" class="tab-content">
+    <h2>FAQ</h2>
+    <ul>
+      <li><strong>Do you offer online sessions?</strong> Yes, we offer both in-person and virtual options.</li>
+      <li><strong>How do I schedule a session?</strong> Contact us by email or through our upcoming form.</li>
+      <li><strong>What are your rates?</strong> Rates vary by subject and length of session—reach out for a quote.</li>
+    </ul>
+  </div>
+
+  <div id="contact" class="tab-content">
+    <h2>Contact Us</h2>
+    <form>
+      <label for="studentName">Student Name</label>
+      <input type="text" id="studentName" name="studentName" required>
+
+      <label for="guardianName">Guardian Name</label>
+      <input type="text" id="guardianName" name="guardianName">
+
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" name="phone" oninput="toggleTextConsent()">
+
+      <div id="textConsentContainer" style="display: none;">
+        <label><input type="checkbox" id="textConsent" name="textConsent"> I consent to receiving text messages at this number</label>
+      </div>
+
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="email" required>
+
+      <label>Subject(s) of Interest</label>
+      
+        <label><input type="checkbox" name="subject" value="SAT"> SAT</label>
+        <label><input type="checkbox" name="subject" value="Math"> Math</label>
+        <label><input type="checkbox" name="subject" value="Statistics"> Statistics</label>
+        <label><input type="checkbox" name="subject" value="Chinese"> Chinese</label>
+        <label><input type="checkbox" name="subject" value="Computer Science"> Computer Science</label>
+        <label><input type="checkbox" name="subject" value="Physics"> Physics</label>
+        <label><input type="checkbox" name="subject" value="AP"> AP</label>
+        <div id="conflictMessage" style="color: rgb(165, 0, 0); margin-top: 1rem; display: none;"></div>
+        <textArea id="otherContainer" name="other_subject" rows="3" placeholder="Want to learn other subjects not mentioned above? List them here!"></textArea>
+        <label for="message">Additional Notes or Questions</label> 
+        <textarea id="message" name="message" rows="4"></textarea>
+        <button type="submit">Submit</button>
+      </div>
+      
+      </div>
+      
+    </form>
+  </div>
+
+  <div id="virtual" class="tab-content">
+    <h2>How to Connect Virtually</h2>
+    <p>
+      We conduct our virtual tutoring sessions using <strong>Jitsi Meet</strong>, a secure and free video conferencing platform.
+    </p>
+    <ol>
+      <li>Prior to your session, the tutor will send you a private Jitsi Meet link via both email and text message.</li>
+      <li>Simply click the link at the scheduled time — you do <strong>not</strong> need to create an account.</li>
+      <li>If your browser asks for microphone or webcam access, press <strong>Allow</strong> so we can communicate and share visual aids.</li>
+      <li>Use a quiet environment and headphones if possible to ensure the best session quality.</li>
+    </ol>
+    <h3>Mac Users: Enabling Screen Sharing</h3>
+    <p>If you need to share your screen during the session on macOS, follow these steps:</p>
+    <ol>
+      <li>Go to <strong>System Settings</strong> (or <strong>System Preferences</strong> on older versions).</li>
+      <li>Navigate to <strong>Security & Privacy</strong> → <strong>Screen Recording</strong>.</li>
+      <li>Ensure your browser (e.g., Chrome, Safari, Firefox) is checked in the list.</li>
+      <li>You may need to restart the browser for changes to take effect.</li>
+    </ol>
+    <p>If you have any trouble accessing your session, contact us immediately using the information on the Contact tab.</p>
+    <h3>Collaborative Whiteboard (Miro Lite)</h3>
+    <p>We may also use <strong>Miro Lite</strong> as a collaborative whiteboard for solving problems or demonstrating concepts.</p>
+    <ol>
+      <li>The tutor will send a unique Miro Lite link at the start of your session.</li>
+      <li>Click the link to join — no login is required.</li>
+      <li>You can use drawing tools, text, and sticky notes directly in the browser to interact with the content.</li>
+      <li>Miro Lite works best on a laptop or tablet, and does not require installing any software.</li>
+    </ol>
+  </div>
+
+  <script>
+    function showTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(div => {
+        div.classList.remove('active');
+      });
+      document.getElementById(tabId).classList.add('active');
+    }
+
+    function toggleTextConsent() {
+      const phone = document.getElementById('phone').value.trim();
+      const consentContainer = document.getElementById('textConsentContainer');
+      consentContainer.style.display = phone ? 'block' : 'none';
+    }
+    function toggleOtherSubject() {
+      const otherToggle = document.getElementById('otherSubjectToggle');
+      const otherContainer = document.getElementById('otherSubjectContainer');
+      const otherInput = document.getElementById('otherSubjectInput');
+      if (otherToggle.checked) {
+        otherContainer.
+        otherInput.setAttribute('required', 'true');
+      } else {
+        otherContainer.style.display = 'none';
+        otherInput.removeAttribute('required');
+        otherInput.value = '';
+      }
+    }
+
+    //document.getElementById('otherSubjectToggle').addEventListener('change', toggleOtherSubject);
+
+    function checkTutorConflict() {
+      const tutor1Subjects = new Set(['SAT', 'Statistics', 'Chinese', 'AP']);
+      const tutor2Subjects = new Set(['Computer Science']);
+      const selectedSubjects = Array.from(document.querySelectorAll('input[name="subject"]:checked')).map(el => el.value);
+
+      const a = selectedSubjects.some(sub => tutor1Subjects.has(sub));
+      const b = selectedSubjects.some(sub => tutor2Subjects.has(sub));
+
+      if (a && b) {
+        document.getElementById('conflictMessage').textContent = "Note: Your subject selections would require both of our tutors. This may require separate sessions with both tutors, depending on the specific subjects.";
+        document.getElementById('conflictMessage').style.display = 'block';
+      } else {
+        document.getElementById('conflictMessage').textContent = "";
+        document.getElementById('conflictMessage').style.display = 'none';
+      }
+    }
+
+    document.querySelectorAll('input[name="subject"]').forEach(el => {
+      el.addEventListener('change', checkTutorConflict);
+    });
+
+</script>
+
+</body>
+</html>
