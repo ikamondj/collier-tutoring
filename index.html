@@ -180,9 +180,12 @@
       <input type="tel" id="phone" name="phone" oninput="toggleTextConsent()">
 
       <div id="textConsentContainer" style="display: none;">
-        <label><input type="checkbox" id="textConsent" name="textConsent"> I consent to receiving text messages at this number</label>
-      </div>
+        <label><input type="checkbox" id="textConsent" name="textConsent" oninput="toggleTextPreferred()"> I consent to receiving text messages at this number</label>
 
+      </div>
+      <div id="textPreferredContainer" style="display: none;">
+        <label><input type="checkbox" id="textPreferred" name="textPreferred"> I prefer text communication over phone calls</label>
+      </div>
       <label for="email">Email Address</label>
       <input type="email" id="email" name="email" required>
 
@@ -272,7 +275,7 @@
         otherSubjects: form.other_subject.value,
         additionalNotes: form.message.value,
         canTextPhoneNumber: form.textConsent.checked,
-        prefersTextCommunication: form.textConsent.checked // or set as needed
+        prefersTextCommunication: form.textPreferred.checked // or set as needed
       };
 
       await fetch('https://collier-tutoring.duckdns.org/submit', {
@@ -307,6 +310,13 @@
       const phone = document.getElementById('phone').value.trim();
       const consentContainer = document.getElementById('textConsentContainer');
       consentContainer.style.display = phone ? 'block' : 'none';
+    }
+    function toggleTextPreferred() {
+      const phone = document.getElementById('phone').value.trim();
+      const consentContainer = document.getElementById('textConsentContainer');
+      const consentCheckbox = document.getElementById('textConsent');
+      const textPreferred = document.getElementById('textPreferredContainer');
+      textPreferred.style.display = phone && consentCheckbox.checked ? 'block' : 'none';
     }
     function toggleOtherSubject() {
       const otherToggle = document.getElementById('otherSubjectToggle');
