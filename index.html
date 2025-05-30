@@ -108,7 +108,7 @@
 
   <header>
     <div style="display: flex; align-items: center; justify-content: center; gap: 1rem;">
-      <img src="logo.png" alt="Collier Tutoring Logo" style="max-width: 100px;">
+      <img src="Logo.png" alt="Collier Tutoring Logo" style="max-width: 100px;">
       <div>
     <h1>Collier Tutoring</h1>
         <p>Expert tutoring in Math, SAT, CS, and more</p>
@@ -137,7 +137,7 @@
   <div id="subjects" class="tab-content">
     <h2>Subjects We Offer</h2>
     <ul>
-      <li>SAT Preparation</li>
+      <li>SAT/ACT Preparation</li>
       <li>Algebra, Geometry, Trigonometry, Pre-Calc, Calculus</li>
       <li>Statistics (AP and College)</li>
       <li>AP Chinese Language and Culture</li>
@@ -149,11 +149,11 @@
   <div id="tutors" class="tab-content">
     <h2>Meet Our Tutors</h2>
     <p>
-      <strong>Lead Tutor:</strong> Over 10 years of experience in SAT, math, statistics, and Chinese, 
+      <strong>Cameron Collier, Lead Tutor:</strong> Over 10 years of experience in SAT, math, statistics, and Chinese,
       providing patient and tailored instruction.
     </p>
     <p>
-      <strong>Co-Tutor:</strong> Focuses on computer science and physics, supporting students with 
+      <strong>Tommy Landman, Co-Tutor:</strong> Focuses on computer science and physics, supporting students with
       deep conceptual learning and problem-solving.
     </p>
   </div>
@@ -189,6 +189,7 @@
       <label>Subject(s) of Interest</label>
       
         <label><input type="checkbox" name="subject" value="SAT"> SAT</label>
+        <label><input type="checkbox" name="subject" value="ACT"> ACT</label>
         <label><input type="checkbox" name="subject" value="Math"> Math</label>
         <label><input type="checkbox" name="subject" value="Statistics"> Statistics</label>
         <label><input type="checkbox" name="subject" value="Chinese"> Chinese</label>
@@ -200,10 +201,6 @@
         <label for="message">Additional Notes or Questions</label> 
         <textarea id="message" name="message" rows="4"></textarea>
         <button type="submit">Submit</button>
-      </div>
-      
-      </div>
-      
     </form>
   </div>
 
@@ -238,6 +235,39 @@
   </div>
 
   <script>
+    document.querySelector('#contact form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const form = e.target;
+      const data = {
+        studentName: form.studentName.value,
+        guardianName: form.guardianName.value,
+        email: form.email.value,
+        phoneNumber: form.phone.value,
+        preferredSubjects: Array.from(form.querySelectorAll('input[name="subject"]:checked')).map(cb => cb.value),
+        otherSubjects: form.other_subject.value,
+        additionalNotes: form.message.value,
+        canTextPhoneNumber: form.textConsent.checked,
+        prefersTextCommunication: form.textConsent.checked // or set as needed
+      };
+
+      const response = await fetch('https://collier-tutoring.duckdns.org/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json',
+                    'X-API-KEY': 'c84ff745-7ce9-4a23-8c30-5e12a355a91c' },
+        body: JSON.stringify(data)
+      });
+
+      if (response.ok) {
+        alert('Thank you! Your information has been submitted.');
+        form.reset();
+      } else {
+        alert('Submission failed. Please try again.');
+      }
+    });
+  </script>
+
+  <script>
     function showTab(tabId) {
       document.querySelectorAll('.tab-content').forEach(div => {
         div.classList.remove('active');
@@ -264,10 +294,9 @@
       }
     }
 
-    //document.getElementById('otherSubjectToggle').addEventListener('change', toggleOtherSubject);
 
     function checkTutorConflict() {
-      const tutor1Subjects = new Set(['SAT', 'Statistics', 'Chinese', 'AP']);
+      const tutor1Subjects = new Set(['SAT', 'ACT', 'Statistics', 'Chinese', 'AP']);
       const tutor2Subjects = new Set(['Computer Science']);
       const selectedSubjects = Array.from(document.querySelectorAll('input[name="subject"]:checked')).map(el => el.value);
 
