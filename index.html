@@ -256,7 +256,7 @@
 
       emailjs.send(templateParams)
               .then(function(response) {
-                console.log("Email successfully sent!", response.status, response.text);
+                alert("Thanks! Your info has been submitted.");
               }, function(error) {
                 console.error("FAILED to send email:", error);
                 return false;
