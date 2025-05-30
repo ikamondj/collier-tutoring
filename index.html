@@ -233,15 +233,11 @@
       <li>Miro Lite works best on a laptop or tablet, and does not require installing any software.</li>
     </ol>
   </div>
-
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
   <script>
-    src="https://cdn.emailjs.com/dist/email.min.js";
-    (function() {
-      emailjs.init("service_msyxjze"); // Get this from EmailJS dashboard
-    })();
+    emailjs.init("service_msyxjze"); // replace with your EmailJS service ID
     function sendFallbackEmail(user) {
       const templateParams = {
-        to_email: "collier.tutoring.svc@gmail.com",
         student_name: user.studentName,
         guardian_name: user.guardianName,
         email: user.email,
@@ -253,15 +249,13 @@
         prefers_text: user.prefersTextCommunication,
         warning: "⚠ Backend failed — calendar invites were not sent."
       };
-
-      emailjs.send(templateParams)
+      emailjs.send("service_msyxjze", "template_erphoqc", templateParams) // replace with your actual template ID
               .then(function(response) {
                 alert("Thanks! Your info has been submitted.");
               }, function(error) {
                 console.error("FAILED to send email:", error);
-                return false;
+                alert("Submission failed. Please try again later.");
               });
-      return true;
     }
     document.querySelector('#contact form').addEventListener('submit', async function(e) {
       e.preventDefault();
