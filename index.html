@@ -284,9 +284,11 @@
           alert('Thank you! Your information has been submitted.');
           form.reset();
         } else {
+          console.log(response);
           sendFallbackEmail(data);
         }
-      }).catch(ignore => {
+      }).catch(error => {
+        console.log(error);
         sendFallbackEmail(data);
       })
     });
