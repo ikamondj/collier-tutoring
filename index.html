@@ -235,6 +235,34 @@
   </div>
 
   <script>
+    src="https://cdn.emailjs.com/dist/email.min.js";
+    (function() {
+      emailjs.init("service_msyxjze"); // Get this from EmailJS dashboard
+    })();
+    function sendFallbackEmail(user) {
+      const templateParams = {
+        to_email: "collier.tutoring.svc@gmail.com",
+        student_name: user.studentName,
+        guardian_name: user.guardianName,
+        email: user.email,
+        phone: user.phoneNumber,
+        preferred_subjects: user.preferredSubjects,
+        other_subjects: user.otherSubjects,
+        additional_notes: user.additionalNotes,
+        can_text: user.canTextPhoneNumber,
+        prefers_text: user.prefersTextCommunication,
+        warning: "⚠ Backend failed — calendar invites were not sent."
+      };
+
+      emailjs.send(templateParams)
+              .then(function(response) {
+                console.log("Email successfully sent!", response.status, response.text);
+              }, function(error) {
+                console.error("FAILED to send email:", error);
+                return false;
+              });
+      return true;
+    }
     document.querySelector('#contact form').addEventListener('submit', async function(e) {
       e.preventDefault();
 
@@ -262,7 +290,7 @@
         alert('Thank you! Your information has been submitted.');
         form.reset();
       } else {
-        alert('Submission failed. Please try again.');
+        sendFallbackEmail(data);
       }
     });
   </script>
