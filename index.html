@@ -237,6 +237,7 @@
   <script>
     emailjs.init("service_msyxjze"); // replace with your EmailJS service ID
     function sendFallbackEmail(user) {
+      console.log("sending fallback email");
       const templateParams = {
         student_name: user.studentName,
         guardian_name: user.guardianName,
@@ -273,7 +274,7 @@
         prefersTextCommunication: form.textConsent.checked // or set as needed
       };
 
-      fetch('https://collier-tutoring.duckdns.org/submit', {
+      await fetch('https://collier-tutoring.duckdns.org/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json',
                     'X-API-KEY': 'c84ff745-7ce9-4a23-8c30-5e12a355a91c' },
@@ -285,7 +286,7 @@
         } else {
           sendFallbackEmail(data);
         }
-      }).catch(function(error) {
+      }).catch(ignore => {
         sendFallbackEmail(data);
       })
     });
